@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import radio.BaseRadio;
-import radio.CheapRadio;
+import radio.ExpensiveRadio;
 import vehicle.BaseVehicle;
 import vehicle.Car;
 
@@ -14,10 +14,17 @@ public class DriverTest {
     BaseVehicle vehicle;
     BaseRadio radio;
 
+    //subclasses must share the same behaviour as the base class + subclasses of the same base class must be substitutable with each other
+    // helicopter needs to take off before it accelerate and hence it breaks the contract/api therefore not substitutable with care
+    //helicopter is not an extension of car but a complete modification of the car api so it is not liskov substitution
+    // so the idea is that everyone that uses the base class would want to use everything in the subclass, so all subclasses need to be substitutable with each other
+        // having another subclass that doesn't substitute would then break cohesion
+
     @Before
     public void setup() {
         vehicle = new Car();
-        radio = new CheapRadio();
+        // usage of helicopter needs to get abstracted out so flying vehicle -> helicopter, land vehicle -> car -> sportscar. then it'll be new pilot & new driver respectively
+        radio = new ExpensiveRadio();
     }
 
     @Test

@@ -6,6 +6,7 @@ public abstract class BaseVehicle {
     }
 
     private int speed = 0;
+    //abstract so that base classes have to use it else error but you can leave it blank
     protected abstract int maxSpeed();
 
     public void accelerate() {

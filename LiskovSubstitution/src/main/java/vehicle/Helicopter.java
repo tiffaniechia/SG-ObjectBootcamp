@@ -1,8 +1,6 @@
 package vehicle;
 
-/**
- * Created by stephandowding on 18/8/15.
- */
+
 public class Helicopter extends BaseVehicle {
 
     protected int maxSpeed(){
