@@ -4,6 +4,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 
+//open close would mean that stairs would be close to modification( into a slide) but open to extension (addition of a chair lift to a staircase).
+// you can use your stairs as a stairs but also able to lift chairs
+// whereas a stairs to slide means you have lost all stairs functionality (do down not up)
+
+
 public class MyListTest {
 
     @Test
