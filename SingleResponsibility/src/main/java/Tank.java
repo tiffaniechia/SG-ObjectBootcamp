@@ -1,80 +1,12 @@
-public class Tank implements TankDriverInterface, TankGunnerInterface {
+public class Tank {
+//implementing two interfaces is a clear sign of something doing two things because well interfaces each do one thing
+    private final Driver driver;
+    private final Gunner gunner;
 
-    private int leftSpeed = 0;
-    private int rightSpeed = 0;
-    private int gunAngle = 0;
-    private int gunRake = 0;
-    private int remainingShells;
-
-    public int getLeftSpeed() {
-        return leftSpeed;
-    }
-
-    public int getRightSpeed() {
-        return rightSpeed;
-    }
-
-    public int getGunAngle() {
-        return gunAngle;
-    }
-
-    public int getGunRake() {
-        return gunRake;
-    }
-
-    public int getRemainingShells() {
-        return remainingShells;
-    }
 
     public Tank(int initialShells) {
-        remainingShells = initialShells;
-    }
-
-    public void stopLeft() {
-        leftSpeed = 0;
-    }
-
-    public void stopRight() {
-        rightSpeed = 0;
-    }
-
-    public void increaseLeftSpeed() {
-        leftSpeed += 1;
-    }
-
-    public void decreaseLeftSpeed() {
-        leftSpeed -= 1;
-    }
-
-    public void increaseRightSpeed() {
-        rightSpeed += 1;
-    }
-
-    public void decreaseRightSpeed() {
-        rightSpeed -= 1;
-    }
-
-    public void rotateGunLeft() {
-        gunAngle -= 45;
-        while (gunAngle < 0) gunAngle += 360;
-    }
-
-    public void rotateGunRight() {
-        gunAngle += 45;
-        while (gunAngle >= 360) gunAngle -= 360;
-    }
-
-    public void raiseGun() {
-        if (gunRake < 45) gunRake += 5;
-    }
-
-    public void lowerGun() {
-        if (gunRake > 0) gunRake -= 5;
-    }
-
-    public void fire() throws OutOfShellsException {
-        if (remainingShells <= 0) throw new OutOfShellsException();
-        remainingShells -= 1;
+        driver = new Driver();
+        gunner = new Gunner(initialShells);
     }
 
     public void raiseAlarm() {
@@ -82,9 +14,74 @@ public class Tank implements TankDriverInterface, TankGunnerInterface {
     }
 
     public void reset() {
-        leftSpeed = 0;
-        rightSpeed = 0;
-        gunAngle = 0;
-        gunRake = 0;
+        driver.resetSpeed();
+        gunner.resetGun();
     }
+
+
+    public int getLeftSpeed() {
+        return driver.getLeftSpeed();
+    }
+
+    public int getRightSpeed() {
+        return driver.getRightSpeed();
+    }
+
+    public int getGunAngle() {
+        return gunner.getGunAngle();
+    }
+
+    public int getGunRake() {
+        return gunner.getGunRake();
+    }
+
+    public int getRemainingShells() {
+        return gunner.getRemainingShells();
+    }
+
+    public void rotateGunLeft() {
+        gunner.rotateGunLeft();
+    }
+
+    public void rotateGunRight() {
+        gunner.rotateGunRight();
+    }
+
+    public void raiseGun() {
+        gunner.raiseGun();
+    }
+
+    public void lowerGun() {
+        gunner.lowerGun();
+    }
+
+    public void fire() throws OutOfShellsException {
+        gunner.fire();
+    }
+
+    public void stopLeft() {
+        driver.stopLeft();
+    }
+
+    public void stopRight() {
+        driver.stopRight();
+    }
+
+    public void increaseLeftSpeed() {
+        driver.increaseLeftSpeed();
+    }
+
+    public void decreaseLeftSpeed() {
+        driver.decreaseLeftSpeed();
+    }
+
+    public void increaseRightSpeed() {
+        driver.increaseRightSpeed();
+    }
+
+    public void decreaseRightSpeed() {
+        driver.decreaseRightSpeed();
+    }
+
+
 }
