@@ -8,68 +8,68 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class DriverTest {
-    Tank tank;
+    SteeringInterface steeringInterface;
 
     @Before
     public void setup() {
-        tank = new Tank(5);
+        steeringInterface = new Tank(5);
     }
 
     @Test
     public void shouldIncreaseBothLeftAndRightWhenMovingForward() {
-        Driver driver = new Driver(tank);
+        Driver driver = new Driver(steeringInterface);
 
         driver.moveForward();
 
-        assertThat(tank.getLeftSpeed(), is(greaterThan(0)));
-        assertThat(tank.getRightSpeed(), is(greaterThan(0)));
-        assertThat(tank.getRightSpeed(), is(equalTo(tank.getLeftSpeed())));
+        assertThat(steeringInterface.getLeftSpeed(), is(greaterThan(0)));
+        assertThat(steeringInterface.getRightSpeed(), is(greaterThan(0)));
+        assertThat(steeringInterface.getRightSpeed(), is(equalTo(steeringInterface.getLeftSpeed())));
     }
 
     @Test
     public void shouldDecreaseBothLeftAndRightWhenMovingBackward() {
-        Driver driver = new Driver(tank);
+        Driver driver = new Driver(steeringInterface);
 
         driver.moveBackward();
 
-        assertThat(tank.getLeftSpeed(), is(lessThan(0)));
-        assertThat(tank.getRightSpeed(), is(lessThan(0)));
-        assertThat(tank.getRightSpeed(), is(equalTo(tank.getLeftSpeed())));
+        assertThat(steeringInterface.getLeftSpeed(), is(lessThan(0)));
+        assertThat(steeringInterface.getRightSpeed(), is(lessThan(0)));
+        assertThat(steeringInterface.getRightSpeed(), is(equalTo(steeringInterface.getLeftSpeed())));
     }
 
     @Test
     public void shouldMakeLeftSpeedGreaterThanRightSpeedWhenTurningRight() {
-        Driver driver = new Driver(tank);
+        Driver driver = new Driver(steeringInterface);
 
         driver.turnRight();
 
-        assertThat(tank.getRightSpeed(), is(lessThan(tank.getLeftSpeed())));
+        assertThat(steeringInterface.getRightSpeed(), is(lessThan(steeringInterface.getLeftSpeed())));
     }
 
     @Test
     public void shouldMakeRightSpeedGreaterThanLeftSpeedWhenTurningLeft() {
-        Driver driver = new Driver(tank);
+        Driver driver = new Driver(steeringInterface);
 
         driver.turnLeft();
 
-        assertThat(tank.getRightSpeed(), is(greaterThan(tank.getLeftSpeed())));
+        assertThat(steeringInterface.getRightSpeed(), is(greaterThan(steeringInterface.getLeftSpeed())));
     }
 
     @Test
     public void shouldStopWhenCallingStop() {
-        Driver driver = new Driver(tank);
+        Driver driver = new Driver(steeringInterface);
         driver.moveForward();
 
         driver.allStop();
 
-        assertThat(tank.getLeftSpeed(), is(equalTo(0)));
-        assertThat(tank.getRightSpeed(), is(equalTo(0)));
+        assertThat(steeringInterface.getLeftSpeed(), is(equalTo(0)));
+        assertThat(steeringInterface.getRightSpeed(), is(equalTo(0)));
 
     }
 
     @Test(expected=AlarmRaisedException.class)
     public void shouldRaiseAlarmExceptionWhenRaisingAlarm() {
-        Driver driver = new Driver(tank);
+        Driver driver = new Driver(steeringInterface);
         driver.raiseAlarm();
     }
 }

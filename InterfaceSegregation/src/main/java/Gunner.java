@@ -1,52 +1,52 @@
-public class Gunner {
-    private Tank tank;
+public class Gunner{
+    private GunningInterface gunningInterface;
 
-    public Gunner(Tank tank) {
+    public Gunner(GunningInterface gunningInterface) {
+        this.gunningInterface = gunningInterface;
 
-        this.tank = tank;
     }
 
     public void raiseGun() {
-        tank.raiseGun();
+        gunningInterface.raiseGun();
     }
 
     public void lowerGun() {
-        tank.lowerGun();
+        gunningInterface.lowerGun();
     }
 
     public void raiseGunToTop() {
         while(true) {
-            int initialRake = tank.getGunRake();
+            int initialRake = gunningInterface.getGunRake();
             raiseGun();
-            if (initialRake == tank.getGunRake()) break;
+            if (initialRake == gunningInterface.getGunRake()) break;
         }
     }
 
     public void lowerGunToBottom() {
         while(true) {
-            int initialRake = tank.getGunRake();
+            int initialRake = gunningInterface.getGunRake();
             lowerGun();
-            if (initialRake == tank.getGunRake()) break;
+            if (initialRake == gunningInterface.getGunRake()) break;
         }
     }
 
     public void rotateGunLeft() {
-        tank.rotateGunLeft();
+        gunningInterface.rotateGunLeft();
     }
 
     public void rotateGunRight() {
-        tank.rotateGunRight();
+        gunningInterface.rotateGunRight();
     }
 
     public void rotateGunToFront() {
-        while (tank.getGunAngle() != 0) rotateGunRight();
+        while (gunningInterface.getGunAngle() != 0) rotateGunRight();
     }
 
     public void fire() throws OutOfShellsException {
-        tank.fire();
+        gunningInterface.fire();
     }
 
     public void raiseAlarm() {
-        tank.raiseAlarm();
+        gunningInterface.raiseAlarm();
     }
 }

@@ -7,87 +7,87 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 
 public class GunnerTest {
-    Tank tank;
+    GunningInterface gunnerInterface;
 
     @Before
     public void setup() {
-        tank = new Tank(5);
+        gunnerInterface = new Tank(5);
     }
 
     @Test
     public void shouldRaiseAndLowerGun() {
-        Gunner gunner = new Gunner(tank);
+        Gunner gunner = new Gunner(gunnerInterface);
 
         gunner.raiseGun();
         gunner.raiseGun();
 
-        assertThat(tank.getGunRake(), is(equalTo(10)));
+        assertThat(gunnerInterface.getGunRake(), is(equalTo(10)));
 
         gunner.lowerGun();
 
-        assertThat(tank.getGunRake(), is(equalTo(5)));
+        assertThat(gunnerInterface.getGunRake(), is(equalTo(5)));
     }
 
     @Test
     public void shouldRaiseGunToTopAndLowerGunToBottom() {
-        Gunner gunner = new Gunner(tank);
+        Gunner gunner = new Gunner(gunnerInterface);
 
         gunner.raiseGunToTop();
 
-        assertThat(tank.getGunRake(), is(equalTo(45)));
+        assertThat(gunnerInterface.getGunRake(), is(equalTo(45)));
 
         gunner.lowerGunToBottom();
 
-        assertThat(tank.getGunRake(), is(equalTo(0)));
+        assertThat(gunnerInterface.getGunRake(), is(equalTo(0)));
     }
 
     @Test
     public void shouldRotateGunToTheLeft() {
-        Gunner gunner = new Gunner(tank);
+        Gunner gunner = new Gunner(gunnerInterface);
 
         gunner.rotateGunLeft();
 
-        assertThat(tank.getGunAngle(), is(equalTo(315)));
+        assertThat(gunnerInterface.getGunAngle(), is(equalTo(315)));
     }
 
 
     @Test
     public void shouldRotateGunToTheRight() {
-        Gunner gunner = new Gunner(tank);
+        Gunner gunner = new Gunner(gunnerInterface);
 
         gunner.rotateGunRight();
 
-        assertThat(tank.getGunAngle(), is(equalTo(45)));
+        assertThat(gunnerInterface.getGunAngle(), is(equalTo(45)));
     }
 
 
     @Test
     public void shouldRotateGunToTheFront() {
-        Gunner gunner = new Gunner(tank);
+        Gunner gunner = new Gunner(gunnerInterface);
 
         gunner.rotateGunRight();
         gunner.rotateGunRight();
         gunner.rotateGunRight();
 
-        assertThat(tank.getGunAngle(), is(not(equalTo(0))));
+        assertThat(gunnerInterface.getGunAngle(), is(not(equalTo(0))));
 
         gunner.rotateGunToFront();
 
-        assertThat(tank.getGunAngle(), is(equalTo(0)));
+        assertThat(gunnerInterface.getGunAngle(), is(equalTo(0)));
     }
 
     @Test
     public void shouldFireGun() throws OutOfShellsException {
-        Gunner gunner = new Gunner(tank);
+        Gunner gunner = new Gunner(gunnerInterface);
 
         gunner.fire();
 
-        assertThat(tank.getRemainingShells(), is(equalTo(4)));
+        assertThat(gunnerInterface.getRemainingShells(), is(equalTo(4)));
     }
 
     @Test(expected = OutOfShellsException.class)
     public void shouldThrowOutOfShellsWhenOutOfShells() throws OutOfShellsException {
-        Gunner gunner = new Gunner(tank);
+        Gunner gunner = new Gunner(gunnerInterface);
 
         gunner.fire();
         gunner.fire();
@@ -100,7 +100,7 @@ public class GunnerTest {
 
     @Test(expected=AlarmRaisedException.class)
     public void shouldRaiseAlarmExceptionWhenRaisingAlarm() {
-        Gunner gunner = new Gunner(tank);
+        Gunner gunner = new Gunner(gunnerInterface);
         gunner.raiseAlarm();
     }
 }

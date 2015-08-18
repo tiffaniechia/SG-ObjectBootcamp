@@ -1,41 +1,42 @@
 public class Driver {
-    private Tank tank;
+    private SteeringInterface steeringInterface;
 
-    public Driver(Tank tank) {
 
-        this.tank = tank;
+    public Driver(SteeringInterface steeringInterface) {
+
+        this.steeringInterface = steeringInterface;
     }
 
     public void moveForward() {
         allStop();
-        tank.increaseLeftSpeed();
-        tank.increaseRightSpeed();
+        steeringInterface.increaseLeftSpeed();
+        steeringInterface.increaseRightSpeed();
     }
 
     public void moveBackward() {
         allStop();
-        tank.decreaseLeftSpeed();
-        tank.decreaseRightSpeed();
+        steeringInterface.decreaseLeftSpeed();
+        steeringInterface.decreaseRightSpeed();
     }
 
     public void allStop() {
-        tank.stopLeft();
-        tank.stopRight();
+        steeringInterface.stopLeft();
+        steeringInterface.stopRight();
     }
 
     public void turnLeft() {
         allStop();
-        tank.increaseRightSpeed();
-        tank.decreaseLeftSpeed();
+        steeringInterface.increaseRightSpeed();
+        steeringInterface.decreaseLeftSpeed();
     }
 
     public void turnRight() {
         allStop();
-        tank.increaseLeftSpeed();
-        tank.decreaseRightSpeed();
+        steeringInterface.increaseLeftSpeed();
+        steeringInterface.decreaseRightSpeed();
     }
 
     public void raiseAlarm() {
-        tank.raiseAlarm();
+        steeringInterface.raiseAlarm();
     }
 }
