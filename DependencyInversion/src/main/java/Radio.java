@@ -9,6 +9,7 @@ public class Radio {
     }
 
     private boolean hasPower = false;
+
     private int volume = 10;
 
     public void turnOn() {
